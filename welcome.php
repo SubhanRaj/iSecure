@@ -1,3 +1,14 @@
+<?php
+
+session_start();
+if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] != true) {
+    header("location: login.php");
+    exit;
+}
+
+
+?>
+
 <!doctype html>
 <html lang="en">
 
@@ -14,6 +25,11 @@
 
 <body>
     <?php require 'partials/_nav.php'; ?>
+
+    <h2 class="text-center">
+        Welcome <?PHP echo $_SESSION['username'] ?>
+    </h2>
+
 
 
     <!-- Bootstrap Bundle with Popper -->

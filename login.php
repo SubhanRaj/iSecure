@@ -6,7 +6,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $username = $_POST["username"];
     $password = $_POST["password"];
-    
+
     $sql = "SELECT * FROM users WHERE username='$username' AND 
     password='$password'";
     $result = mysqli_query($conn, $sql);
@@ -14,11 +14,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $num = mysqli_num_rows($result);
     if ($num == 1) {
         $login = true;
-        
-    } 
-    } else {
-        $showError = "Invalid username or password";
+        session_start();
+        $_SESSION['loggedin'] = true;
+        $_SESSION['username'] = $username;
+        header("location: welcome.php");
     }
+} else {
+    $showError = "Invalid username or password";
+}
 
 ?>
 
@@ -47,7 +50,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
     if ($showError) {
         echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
-          <strong>Error !</strong> ' . $showError.' 
+          <strong>Error !</strong> ' . $showError . ' 
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>';
     }
@@ -69,7 +72,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <label for="password" class="form-label">Password</label>
                 <input type="password" class="form-control" id="password" name="password">
             </div>
-    
+
             <button type="submit" class="btn btn-primary">Login</button>
         </form>
     </div>
