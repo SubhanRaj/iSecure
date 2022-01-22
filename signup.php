@@ -1,3 +1,32 @@
+<?PHP
+$showAlert = false;
+$showError = false;
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    require 'partials/_dbconnect.php';
+
+    $username = $_POST["username"];
+    $password = $_POST["password"];
+    $cpassword = $_POST["cpassword"];
+    $exists = false;
+
+    if (($password == $cpassword) && $exists == False) {
+        $sql = "INSERT INTO `users` (`username`, `password`, `dt`) VALUES ('$username', '$password', current_timestamp());";
+        $result = mysqli_query($conn, $sql);
+        if ($result) {
+            $showAlert = true;
+        }
+        else {
+            echo 'The account was not created because username'. $username .' already exists.';
+        }
+    }
+    else {
+        $showError = true;
+    }
+}
+
+
+?>
+
 <!doctype html>
 <html lang="en">
 
@@ -14,7 +43,23 @@
 
 <body>
     <?php require 'partials/_nav.php'; ?>
+    <?PHP
+    if ($showAlert) {
+        echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+        <strong>Success!</strong> Your account is now created & you can login. 
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>';
+    }
+    if ($showError) {
+        echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+          <strong>Unable to Signup</strong> Your account is not created.
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>';
+    }
+
+    ?>
     <div class="container">
+
         <h1 class="text-center mt-3">Sign Up to iSecure</h1>
 
         <!-- Signup Form -->
@@ -22,7 +67,7 @@
         <form action="/iSecure/signup.php" method="POST">
             <div class="mb-3">
                 <label for="username" class="form-label">Username</label>
-                <input type="email" class="form-control" id="username" name="username" aria-describedby="emailHelp">
+                <input type="text" class="form-control" id="username" name="username" aria-describedby="emailHelp">
 
             </div>
             <div class="mb-3">
