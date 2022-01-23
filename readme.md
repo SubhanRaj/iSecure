@@ -24,8 +24,6 @@ PASSWORD_VERIFY();
 * DataBase Name : iSecure
 * Server Name : localhost
 
-## Contact the Dev
+## [Contact the Dev](https://masterofcosmos.com)
 
-<!-- Insert URL https://masterofcosmos.com -->
 
-![](https://masterofcosmos.com)
