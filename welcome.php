@@ -25,10 +25,16 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] != true) {
 
 <body>
     <?php require 'partials/_nav.php'; ?>
-
-    <h2 class="text-center">
-        Welcome <?PHP echo $_SESSION['username'] ?>
-    </h2>
+    <div class="container">
+        <div class="alert alert-success mt-3 " role="alert">
+            <h2 class="alert-heading text-center">Welcome <?PHP echo $_SESSION['username'] ?></h2>
+            <p class="text-center">Hey How are you? Welcome to iSecure, you're logged in as <?PHP echo $_SESSION['username'] ?><br>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto, architecto molestias corrupti laborum vel corporis reiciendis mollitia illum eius eveniet enim nesciunt dolor asperiores eligendi odio quis nobis perspiciatis magnam Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem, alias?
+            </p>
+            <hr>
+            <p class="mb-0">Whenever you need to, you can logout using this link. <a class="btn btn-outline-primary btn-sm" href="/iSecure/logout.php" role="button">Log Out</a></p>
+        </div>
+    </div>
 
 
 
