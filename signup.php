@@ -7,20 +7,26 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = $_POST["username"];
     $password = $_POST["password"];
     $cpassword = $_POST["cpassword"];
-    $exists = false;
+    // 
+    // Check existing user
+    $existSQL = "SELECT * FROM `users` WHERE username = '$username';";
+    $result = mysqli_query($conn, $existSQL);
+    $numExistRows = mysqli_num_rows($result);
+    if ($numExistRows > 0) {
+        // $exists = true;
+        $showError = "Username already exists.";
+    } else {
+        // $exists = false;
 
-    if (($password == $cpassword) && $exists == False) {
-        $sql = "INSERT INTO `users` (`username`, `password`, `dt`) VALUES ('$username', '$password', current_timestamp());";
-        $result = mysqli_query($conn, $sql);
-        if ($result) {
-            $showAlert = true;
+        if (($password == $cpassword)) {
+            $sql = "INSERT INTO `users` (`username`, `password`, `dt`) VALUES ('$username', '$password', current_timestamp());";
+            $result = mysqli_query($conn, $sql);
+            if ($result) {
+                $showAlert = true;
+            }
+        } else {
+            $showError = "Password to not match.";
         }
-        else {
-            echo 'The account was not created because username'. $username .' already exists.';
-        }
-    }
-    else {
-        $showError = true;
     }
 }
 
@@ -52,7 +58,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
     if ($showError) {
         echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
-          <strong>Unable to Signup</strong> Your account is not created.
+          <strong>Unable to Signup!</strong> Your account is not created becuase ' . $showError . ' 
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>';
     }
