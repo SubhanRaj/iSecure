@@ -3,11 +3,11 @@
 <strong>iSecure</strong> is a working PHP Project for user account managament with following fucitionality:
 
 <!-- Create a checkbox in todo list style -->
-- [ ] New User Registration
-- [ ] Existing User Login
-- [ ] Storing username and password in MySQL database
-- [ ] Logout
-- [ ] Showing menu as per as current user status
+- [x] New User Registration
+- [x] Existing User Login
+- [x] Storing username and password in MySQL database
+- [x] Logout
+- [x] Showing menu as per as current user status
 
 
 ## PHP Functions and features used 
